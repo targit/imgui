@@ -1,0 +1,69 @@
+Some notes about the tanz/vulkan branch.
+
+* What?
+
+In this branch we experiment with turning imgui into a standalone
+library.  We use CMake as buildsystem, for purely pragmatic reasons.
+
+* Why?
+
+Usually imgui is considered as a collection of code to be integrated
+and tweaked into you own project as you like.  Therefore, there is no
+library to install or traces of any build system.
+
+However, very often the default imgui code is perfectly fine and
+(more or less) generic configurations will be sufficient.  And CMake
+can be considered a standard for build C++ programs (if you like it or
+not).
+
+Thus it seems to make (some) sense to undertake this effort (as
+opposed to do it partially again and again).
+
+* How to configure the whole shebang?
+
+Without any further settings, the default configuration will only
+build the base library.  That is, you are missing any backend and
+platform driver (see below), which is probably not what you want.
+
+** Platform and rendering backends
+
+Usually you will need at least one platform driver and one rendering
+backend.  Currently you have the following options (imgui itself has
+more to offer):
+
+- IMGUI_BUILD_PLATFORM_SDL2 :: If enabled, the SDL2 platform backend will
+  be built.  Thus, you will need to have SDL2 installed.  This is the
+  only platform at the moment because it has a lot to offer, is
+  convenient to use (i think), and most importantly: It is itself
+  cross platform.
+  The resulting library will be known as =imgui::platform-sdl2=, in case
+  you acutally want to use it.
+- IMGUI_BUILD_RENDERER_OPENGL2 :: This enables the OpenGL2 renderer.
+  This render is widely supported across platforms (OS).  Selecting
+  this introduces a dependency to opengl, of course.
+  In CMake the targets name will be =imgui::renderer-opengl2=.
+- IMGUI_BUILD_RENDERER_OPENGL3 :: This enables the more modern OpenGL3
+  renderer at the cost of introducing a dependency to such an
+  implementation.  Beware: For using this renderer you will need a
+  special library for loading the functions.  Popular choices seem to
+  be GLEW, GL3W, GLAD, GLAD2 and possibly others.  For instance, the
+  example program, which uses the SDL2 platform in conjunction with
+  this renderer will need GLEW in order to be built and run.
+  Known as =imgui::renderer-opengl3= to CMake.
+- IMGUI_BUILD_RENDERER_VULKAN :: Selects the Vulkan renderer.  Most
+  recent (and complicated) cross-platform pixel creation technology.
+  Of course, this introduces a dependency to a Vulkan implementation.
+  It's target name is =imgui::renderer-vulkan=.
+
+** What else is there?
+
+- IMGUI_BUILD_EXAMPLES :: This build the examples for the currently
+  selected platform/renderer combinations.  The demo library needs to
+  be built as well (see below). Note: This example programs won't get
+  installed, they will reside in the build-directory only.
+- IMGUI_INSTALL_FONTS :: Installs the contributed fonts below
+  =<prefix>/share/imgui/=.
+- IMGUI_BUILD_MISC :: Build the =std::string= input source.  Use the
+  library name =imgui::misc= to use it.
+- IMGUI_DEMO :: Builds the demo program.  Not really useful, but a
+  dependency for the example programs.

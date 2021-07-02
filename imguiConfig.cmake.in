@@ -1,0 +1,21 @@
+include( CMakeFindDependencyMacro )
+
+find_dependency( Threads REQUIRED )
+
+set( IMGUI_BUILD_PLATFORM_SDL2 @IMGUI_BUILD_PLATFORM_SDL2 )
+set( IMGUI_BUILD_RENDERER_OPENGL2 @IMGUI_BUILD_RENDERER_OPENGL2@ )
+set( IMGUI_BUILD_RENDERER_OPENGL3 @IMGUI_BUILD_RENDERER_OPENGL3@ )
+
+if( IMGUI_BUILD_PLATFORM_SDL2 )
+  find_dependency( SDL2 REQUIRED )
+endif()
+
+if( IMGUI_BUILD_RENDERER_OPENGL2 )
+  find_dependency( OpenGL REQUIRED )
+endif()
+
+if( IMGUI_BUILD_RENDERER_OPENGL3 )
+  find_dependency( OpenGL REQUIRED )
+endif()
+
+include( ${CMAKE_CURRENT_LIST_DIR}/imguiTargets.cmake )
