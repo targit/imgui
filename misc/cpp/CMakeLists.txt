@@ -4,20 +4,20 @@ option( IMGUI_BUILD_MISC
 
 if( IMGUI_BUILD_MISC )
   add_library(
-    imgui-misc
+    misc
     imgui_stdlib.cpp )
   target_include_directories(
-    imgui-misc
+    misc
     PUBLIC
     $<BUILD_INTERFACE:${IMGUI_SRC_ROOT}>
     $<INSTALL_INTERFACE:include/> )
   install(
-    TARGETS imgui-misc
+    TARGETS misc
     ${INSTALL_TARGETS_DEFAULT_ARGS})
   install(
     FILES
     imgui_stdlib.h
     DESTINATION
     include/ )
-  add_library( imgui::misc ALIAS imgui-misc )    
+  add_library( imgui::misc ALIAS misc )
 endif()

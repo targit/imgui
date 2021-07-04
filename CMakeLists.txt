@@ -18,7 +18,7 @@ set(
   INCLUDES DESTINATION "include/")
 
 add_library(
-  imgui-base
+  base
   STATIC
   imgui.cpp
   imgui_draw.cpp
@@ -27,19 +27,19 @@ add_library(
   )
 
 target_include_directories(
-  imgui-base
+  base
   PUBLIC
   $<BUILD_INTERFACE:${IMGUI_SRC_ROOT}>
   $<INSTALL_INTERFACE:include/>
   )
 
 target_link_libraries(
-  imgui-base
+  base
   PUBLIC
   Threads::Threads )  
 
 install(
-  TARGETS imgui-base
+  TARGETS base
   ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install(
@@ -52,7 +52,7 @@ install(
   DESTINATION
   include/)
 
-add_library( imgui::base ALIAS imgui-base )
+add_library( imgui::base ALIAS base )
 
 option(
   IMGUI_BUILD_DEMO
@@ -61,28 +61,28 @@ option(
 
 if( IMGUI_BUILD_DEMO )
   add_library(
-    imgui-demo
+    demo
     STATIC
     imgui_demo.cpp
     )
 
   target_include_directories(
-    imgui-demo
+    demo
     PUBLIC
     $<BUILD_INTERFACE:${IMGUI_SRC_ROOT}>
     $<INSTALL_INTERFACE:include/>
     )
 
   target_link_libraries(
-    imgui-demo
+    demo
     PUBLIC
-    imgui-base )  
+    base )
 
   install(
-    TARGETS imgui-demo
+    TARGETS demo
     ${INSTALL_TARGETS_DEFAULT_ARGS})
   
-  add_library( imgui::demo ALIAS imgui-demo )
+  add_library( imgui::demo ALIAS demo )
 endif()
 
 add_subdirectory( backends/ )

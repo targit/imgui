@@ -17,103 +17,103 @@ option( IMGUI_BUILD_RENDERER_VULKAN
 if( IMGUI_BUILD_PLATFORM_SDL2 )
   find_package( SDL2 REQUIRED )
   add_library(
-    imgui-sdl2
+    platform-sdl2
     imgui_impl_sdl.cpp )
   target_link_libraries(
-    imgui-sdl2
+    platform-sdl2
     SDL2::SDL2
-    imgui-base )
+    imgui::base )
   target_include_directories(
-    imgui-sdl2
+    platform-sdl2
     PUBLIC
     $<BUILD_INTERFACE:${IMGUI_SRC_ROOT}/backends/>
     $<INSTALL_INTERFACE:include/>
     )
   install(
-    TARGETS imgui-sdl2
+    TARGETS platform-sdl2
     ${INSTALL_TARGETS_DEFAULT_ARGS})
   install(
     FILES
     imgui_impl_sdl.h
     DESTINATION
     include/ )    
-  add_library( imgui::platform-sdl2 ALIAS imgui-sdl2 )
+  add_library( imgui::platform-sdl2 ALIAS platform-sdl2 )
 endif()
 
 if( IMGUI_BUILD_RENDERER_OPENGL2 )
   find_package( OpenGL REQUIRED )
   add_library(
-    imgui-opengl2
+    renderer-opengl2
     imgui_impl_opengl2.cpp )
   target_link_libraries(
-    imgui-opengl2
+    renderer-opengl2
     OpenGL::GL
-    imgui-base )
+    imgui::base )
   target_include_directories(
-    imgui-opengl2
+    renderer-opengl2
     PUBLIC
     $<BUILD_INTERFACE:${IMGUI_SRC_ROOT}/backends/>
     $<INSTALL_INTERFACE:include/>
     )
   install(
-    TARGETS imgui-opengl2
+    TARGETS renderer-opengl2
     ${INSTALL_TARGETS_DEFAULT_ARGS})
   install(
     FILES
     imgui_impl_opengl2.h
     DESTINATION
     include/ )    
-  add_library( imgui::renderer-opengl2 ALIAS imgui-opengl2 )
+  add_library( imgui::renderer-opengl2 ALIAS renderer-opengl2 )
 endif()
 
 if( IMGUI_BUILD_RENDERER_OPENGL3 )
   find_package( OpenGL REQUIRED )
   add_library(
-    imgui-opengl3
+    renderer-opengl3
     imgui_impl_opengl3.cpp )
   target_link_libraries(
-    imgui-opengl3
+    renderer-opengl3
     OpenGL::GL
-    imgui-base )
+    imgui::base )
   target_include_directories(
-    imgui-opengl3
+    renderer-opengl3
     PUBLIC
     $<BUILD_INTERFACE:${IMGUI_SRC_ROOT}/backends/>
     $<INSTALL_INTERFACE:include/>
     )
   install(
-    TARGETS imgui-opengl3
+    TARGETS renderer-opengl3
     ${INSTALL_TARGETS_DEFAULT_ARGS})
   install(
     FILES
     imgui_impl_opengl3.h
     DESTINATION
     include/ )    
-  add_library( imgui::renderer-opengl3 ALIAS imgui-opengl3 )
+  add_library( imgui::renderer-opengl3 ALIAS renderer-opengl3 )
 endif()
 
 if( IMGUI_BUILD_RENDERER_VULKAN )
   find_package( Vulkan REQUIRED )
   add_library(
-    imgui-vulkan
+    renderer-vulkan
     imgui_impl_vulkan.cpp )
   target_link_libraries(
-    imgui-vulkan
+    renderer-vulkan
     Vulkan::Vulkan
-    imgui-base )
+    imgui::base )
   target_include_directories(
-    imgui-vulkan
+    renderer-vulkan
     PUBLIC
     $<BUILD_INTERFACE:${IMGUI_SRC_ROOT}/backends/>
     $<INSTALL_INTERFACE:include/>
     )
   install(
-    TARGETS imgui-vulkan
+    TARGETS renderer-vulkan
     ${INSTALL_TARGETS_DEFAULT_ARGS})
   install(
     FILES
     imgui_impl_vulkan.h
     DESTINATION
     include/ )    
-  add_library( imgui::renderer-vulkan ALIAS imgui-vulkan )
+  add_library( imgui::renderer-vulkan ALIAS renderer-vulkan )
 endif()

@@ -6,10 +6,10 @@ if( IMGUI_BUILD_EXAMPLES AND IMGUI_BUILD_PLATFORM_SDL2 AND IMGUI_BUILD_RENDERER_
     main.cpp )
   target_link_libraries(
     sdl2-vulkan
-    imgui-base
-    imgui-sdl2
-    imgui-vulkan
-    imgui-demo
+    imgui::base
+    imgui::platform-sdl2
+    imgui::renderer-vulkan
+    imgui::demo
 #    GLEW::GLEW
     )
 endif()
