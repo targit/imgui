@@ -44,6 +44,7 @@ install(
 
 install(
   FILES
+  imconfig.h
   imgui.h
   imgui_internal.h
   imstb_rectpack.h
