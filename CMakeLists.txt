@@ -23,8 +23,14 @@ add_library(
   imgui.cpp
   imgui_draw.cpp
   imgui_tables.cpp
-  imgui_widgets.cpp  
+  imgui_widgets.cpp
   )
+
+
+set_target_properties(
+  base
+  PROPERTIES
+  OUTPUT_NAME imgui-base )
 
 target_include_directories(
   base
@@ -36,7 +42,7 @@ target_include_directories(
 target_link_libraries(
   base
   PUBLIC
-  Threads::Threads )  
+  Threads::Threads )
 
 install(
   TARGETS base
@@ -67,6 +73,11 @@ if( IMGUI_BUILD_DEMO )
     imgui_demo.cpp
     )
 
+  set_target_properties(
+    demo
+    PROPERTIES
+    OUTPUT_NAME imgui-demo )
+
   target_include_directories(
     demo
     PUBLIC
@@ -82,7 +93,7 @@ if( IMGUI_BUILD_DEMO )
   install(
     TARGETS demo
     ${INSTALL_TARGETS_DEFAULT_ARGS})
-  
+
   add_library( imgui::demo ALIAS demo )
 endif()
 
