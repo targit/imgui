@@ -18,6 +18,16 @@ set(
   RUNTIME DESTINATION  "bin/"
   INCLUDES DESTINATION "include/")
 
+if( IMGUI_CONFIG_FREETYPE )
+  find_package( Freetype  REQUIRED )
+  set( IMGUI_BASE_FREETYPE_LIBS Freetype::Freetype )
+  set( IMGUI_BASE_FREETYPE_INCS $<BUILD_INTERFACE:${IMGUI_SRC_ROOT}/misc/freetype/> )
+  set( IMGUI_BASE_FREETYPE_CODE ${IMGUI_SRC_ROOT}/misc/freetype/imgui_freetype.cpp )
+else()
+  set( IMGUI_BASE_FREETYPE_LIBS  )
+endif()
+
+
 add_library(
   base
   STATIC
@@ -25,6 +35,7 @@ add_library(
   imgui_draw.cpp
   imgui_tables.cpp
   imgui_widgets.cpp
+  ${IMGUI_BASE_FREETYPE_CODE}
   )
 
 
@@ -38,13 +49,15 @@ target_include_directories(
   PUBLIC
   $<BUILD_INTERFACE:${IMGUI_SRC_ROOT}>
   $<BUILD_INTERFACE:${IMGUI_BUILD_ROOT}>
+  ${IMGUI_BASE_FREETYPE_INCS}
   $<INSTALL_INTERFACE:include/>
   )
 
 target_link_libraries(
   base
   PUBLIC
-  Threads::Threads )
+  Threads::Threads
+  ${IMGUI_BASE_FREETYPE_LIBS})
 
 install(
   TARGETS base
@@ -69,14 +82,25 @@ option(
   FALSE )
 
 option(
-  IMGUI_CONF_32BIT_INDICES
+  IMGUI_CONFIG_32BIT_INDICES
   "Use 32bit vertex indices"
+  FALSE )
+
+option(
+  IMGUI_CONFIG_FREETYPE
+  "Use freetype for fonts. (Requires libfreetype)"
   FALSE )
 
 if( IMGUI_CONFIG_32BIT_INDICES )
   set(IMGUI_CONF_32BIT_FLAG 1 )
 else()
   set(IMGUI_CONF_32BIT_FLAG 0 )
+endif()
+
+if( IMGUI_CONFIG_FREETYPE )
+  set( IMGUI_CONF_FREETYPE_FLAG 1 )
+else()
+  set( IMGUI_CONF_FREETYPE_FLAG 0 )
 endif()
 configure_file( imconfig.h.in imconfig.h @ONLY )
 

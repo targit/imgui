@@ -5,7 +5,12 @@ option( IMGUI_BUILD_MISC
 if( IMGUI_BUILD_MISC )
   add_library(
     misc
+    STATIC
     imgui_stdlib.cpp )
+  set_target_properties(
+    misc
+    PROPERTIES
+    OUTPUT_NAME imgui-misc )
   target_include_directories(
     misc
     PUBLIC
