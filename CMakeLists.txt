@@ -103,11 +103,58 @@ add_subdirectory( examples )
 include( CMakePackageConfigHelpers )
 configure_file( imguiConfig.cmake.in imguiConfig.cmake @ONLY )
 
+
+
+configure_file( imgui-opengl2.pc.in imgui-opengl2.pc @ONLY )
+configure_file( imgui-opengl3.pc.in imgui-opengl3.pc @ONLY )
+configure_file( imgui-vulkan.pc.in imgui-vulkan.pc @ONLY )
+
 install(
   FILES "${CMAKE_CURRENT_BINARY_DIR}/imguiConfig.cmake"
   DESTINATION lib/cmake/imgui/ )
+
 
 install(
   EXPORT imguiTargets
   NAMESPACE imgui::
   DESTINATION lib/cmake/imgui/ )
+
+configure_file( imgui.pc.in imgui.pc @ONLY )
+install(
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/imgui.pc"
+  DESTINATION lib/pkgconfig/ )
+
+if( IMGUI_BUILD_DEMO )
+  configure_file( imgui-demo.pc.in imgui-demo.pc @ONLY )
+    install(
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/imgui-demo.pc"
+    DESTINATION lib/pkgconfig/ )
+endif()
+
+if( IMGUI_BUILD_PLATFORM_SDL2 )
+  configure_file( imgui-sdl2.pc.in imgui-sdl2.pc @ONLY )
+  install(
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/imgui-sdl2.pc"
+    DESTINATION lib/pkgconfig/ )
+endif()
+
+if( IMGUI_BUILD_RENDERER_OPENGL2 )
+  configure_file( imgui-opengl2.pc.in imgui-opengl2.pc @ONLY )
+  install(
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/imgui-opengl2.pc"
+    DESTINATION lib/pkgconfig/ )
+endif()
+
+if( IMGUI_BUILD_RENDERER_OPENGL3 )
+  configure_file( imgui-opengl3.pc.in imgui-opengl3.pc @ONLY )
+  install(
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/imgui-opengl3.pc"
+    DESTINATION lib/pkgconfig/ )
+endif()
+
+if( IMGUI_BUILD_RENDERER_VULKAN )
+  configure_file( imgui-vulkan.pc.in imgui-vulkan.pc @ONLY )
+  install(
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/imgui-vulkan.pc"
+    DESTINATION lib/pkgconfig/ )
+endif()

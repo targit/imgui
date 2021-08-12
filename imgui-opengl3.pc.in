@@ -1,0 +1,12 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=${prefix}
+includedir=${prefix}/include/
+libdir=${prefix}/lib/
+
+Name: imgui-opengl3
+Description: The OpenGL3 renderer for imgui.
+Version: 0.0.0
+Cflags: -I${includedir}/
+Libs: -L${libdir}/${lib_prefix}/ -lrenderer-opengl3
+Requires.private: opengl
+
