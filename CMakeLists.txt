@@ -2,6 +2,7 @@ project( imgui CXX )
 cmake_minimum_required( VERSION 3.20 )
 
 set( IMGUI_SRC_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
+set( IMGUI_BUILD_ROOT ${CMAKE_CURRENT_BINARY_DIR})
 
 set( CMAKE_CXX_STANDARD_REQUIRED TRUE )
 set( CMAKE_CXX_STANDARD 17 )
@@ -36,6 +37,7 @@ target_include_directories(
   base
   PUBLIC
   $<BUILD_INTERFACE:${IMGUI_SRC_ROOT}>
+  $<BUILD_INTERFACE:${IMGUI_BUILD_ROOT}>
   $<INSTALL_INTERFACE:include/>
   )
 
@@ -50,7 +52,7 @@ install(
 
 install(
   FILES
-  imconfig.h
+  ${IMGUI_BUILD_ROOT}/imconfig.h
   imgui.h
   imgui_internal.h
   imstb_rectpack.h
@@ -65,6 +67,19 @@ option(
   IMGUI_BUILD_DEMO
   "Build demo library"
   FALSE )
+
+option(
+  IMGUI_CONF_32BIT_INDICES
+  "Use 32bit vertex indices"
+  FALSE )
+
+if( IMGUI_CONFIG_32BIT_INDICES )
+  set(IMGUI_CONF_32BIT_FLAG 1 )
+else()
+  set(IMGUI_CONF_32BIT_FLAG 0 )
+endif()
+configure_file( imconfig.h.in imconfig.h @ONLY )
+
 
 if( IMGUI_BUILD_DEMO )
   add_library(
@@ -103,11 +118,10 @@ add_subdirectory( examples )
 include( CMakePackageConfigHelpers )
 configure_file( imguiConfig.cmake.in imguiConfig.cmake @ONLY )
 
-
-
 configure_file( imgui-opengl2.pc.in imgui-opengl2.pc @ONLY )
 configure_file( imgui-opengl3.pc.in imgui-opengl3.pc @ONLY )
 configure_file( imgui-vulkan.pc.in imgui-vulkan.pc @ONLY )
+
 
 install(
   FILES "${CMAKE_CURRENT_BINARY_DIR}/imguiConfig.cmake"

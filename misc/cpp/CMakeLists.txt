@@ -11,6 +11,11 @@ if( IMGUI_BUILD_MISC )
     PUBLIC
     $<BUILD_INTERFACE:${IMGUI_SRC_ROOT}>
     $<INSTALL_INTERFACE:include/> )
+  target_link_libraries(
+    misc
+    PUBLIC
+    base
+    )
   install(
     TARGETS misc
     ${INSTALL_TARGETS_DEFAULT_ARGS})
