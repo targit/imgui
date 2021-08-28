@@ -91,6 +91,11 @@ option(
   "Use freetype for fonts. (Requires libfreetype)"
   FALSE )
 
+option(
+  IMGUI_CONFIG_DISABLE_OBSOLETE_FUNCTIONS
+  "Disable obsolete functions"
+  TRUE )
+
 if( IMGUI_CONFIG_32BIT_INDICES )
   set(IMGUI_CONF_32BIT_FLAG 1 )
 else()
@@ -102,6 +107,13 @@ if( IMGUI_CONFIG_FREETYPE )
 else()
   set( IMGUI_CONF_FREETYPE_FLAG 0 )
 endif()
+
+if( IMGUI_CONFIG_DISABLE_OBSOLETE_FUNCTIONS )
+  set( IMGUI_CONF_DISABLE_OBSOLETE_FUNCTIONS 1 )
+else()
+  set( IMGUI_CONF_DISABLE_OBSOLETE_FUNCTIONS 0 )
+endif()
+
 configure_file( imconfig.h.in imconfig.h @ONLY )
 
 
