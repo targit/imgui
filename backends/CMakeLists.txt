@@ -74,6 +74,7 @@ if( IMGUI_BUILD_RENDERER_OPENGL3 )
   target_link_libraries(
     renderer-opengl3
     OpenGL::GL
+    ${CMAKE_DL_LIBS}
     imgui::base )
   target_include_directories(
     renderer-opengl3
@@ -87,6 +88,7 @@ if( IMGUI_BUILD_RENDERER_OPENGL3 )
   install(
     FILES
     imgui_impl_opengl3.h
+    imgui_impl_opengl3_loader.h
     DESTINATION
     include/ )    
   add_library( imgui::renderer-opengl3 ALIAS renderer-opengl3 )
