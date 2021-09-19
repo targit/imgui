@@ -5,8 +5,7 @@ libdir=${prefix}/lib/
 
 Name: imgui-vulkan
 Description: The Vulkan renderer for imgui.
-Version: 0.0.0
+Version: 1.84.2
 Cflags: -I${includedir}/
 Libs: -L${libdir}/${lib_prefix}/ -lrenderer-vulkan
 Requires.private: vulkan
-

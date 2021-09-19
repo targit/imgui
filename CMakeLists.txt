@@ -1,5 +1,6 @@
-project( imgui CXX )
 cmake_minimum_required( VERSION 3.20 )
+project( imgui VERSION 1.84.2 LANGUAGES CXX)
+
 
 set( IMGUI_SRC_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 set( IMGUI_BUILD_ROOT ${CMAKE_CURRENT_BINARY_DIR})
