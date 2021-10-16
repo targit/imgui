@@ -9,6 +9,7 @@
 //   the backend itself (imgui_impl_vulkan.cpp), but should PROBABLY NOT be used by your own engine/app code.
 // Read comments in imgui_impl_vulkan.h.
 
+#define SDL_MAIN_HANDLED 1
 #include "imgui.h"
 #include "imgui_impl_sdl.h"
 #include "imgui_impl_vulkan.h"
@@ -341,6 +342,7 @@ static void FramePresent(ImGui_ImplVulkanH_Window* wd)
 
 int main(int, char**)
 {
+    SDL_SetMainReady();
     // Setup SDL
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0)
     {
