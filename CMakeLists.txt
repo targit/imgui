@@ -1,5 +1,6 @@
-cmake_minimum_required( VERSION 3.20 )
-project( imgui VERSION 1.84.2 LANGUAGES CXX)
+cmake_minimum_required( VERSION 3.21 )
+cmake_policy( SET CMP0048 NEW )
+project( imgui VERSION 1.88 LANGUAGES CXX)
 
 
 set( IMGUI_SRC_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
@@ -153,7 +154,15 @@ add_subdirectory( backends/ )
 add_subdirectory( misc )
 add_subdirectory( examples )
 include( CMakePackageConfigHelpers )
-configure_file( imguiConfig.cmake.in imguiConfig.cmake @ONLY )
+configure_package_config_file(
+  imguiConfig.cmake.in
+  imguiConfig.cmake
+  INSTALL_DESTINATION lib/cmake/imgui )
+# @ONLY )
+write_basic_package_version_file(
+  imguiConfigVersion.cmake
+  VERSION ${CMAKE_PROJECT_VERSION}
+  COMPATIBILITY ExactVersion )
 
 configure_file( imgui-opengl2.pc.in imgui-opengl2.pc @ONLY )
 configure_file( imgui-opengl3.pc.in imgui-opengl3.pc @ONLY )
@@ -161,7 +170,9 @@ configure_file( imgui-vulkan.pc.in imgui-vulkan.pc @ONLY )
 
 
 install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/imguiConfig.cmake"
+  FILES
+  "${CMAKE_CURRENT_BINARY_DIR}/imguiConfig.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/imguiConfigVersion.cmake"
   DESTINATION lib/cmake/imgui/ )
 
 

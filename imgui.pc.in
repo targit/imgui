@@ -5,6 +5,6 @@ libdir=${prefix}/lib/
 
 Name: imgui
 Description: An immediate mode GUI library
-Version: 1.84.2
+Version: @CMAKE_PROJECT_VERSION@
 Cflags: -I${includedir}/
 Libs: -L${libdir}/${lib_prefix}/ -limgui-base
