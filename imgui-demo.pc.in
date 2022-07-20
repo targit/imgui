@@ -5,7 +5,7 @@ libdir=${prefix}/lib/
 
 Name: imgui-demo
 Description: The demo widget for imgui.
-Version: 1.84.2
+Version: @CMAKE_PROJECT_VERSION@
 Cflags: -I${includedir}/
 Libs: -L${libdir}/${lib_prefix}/ -limgui-demo
 Requires.private: imgui
