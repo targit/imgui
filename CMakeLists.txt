@@ -1,6 +1,6 @@
 cmake_minimum_required( VERSION 3.21 )
 cmake_policy( SET CMP0048 NEW )
-project( imgui VERSION 1.88 LANGUAGES CXX)
+project( imgui VERSION 1.90.8 LANGUAGES CXX)
 
 
 set( IMGUI_SRC_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
