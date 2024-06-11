@@ -18,7 +18,7 @@ if( IMGUI_BUILD_PLATFORM_SDL2 )
   find_package( SDL2 REQUIRED )
   add_library(
     platform-sdl2
-    imgui_impl_sdl.cpp )
+    imgui_impl_sdl2.cpp )
   target_link_libraries(
     platform-sdl2
     SDL2::SDL2
@@ -34,9 +34,9 @@ if( IMGUI_BUILD_PLATFORM_SDL2 )
     ${INSTALL_TARGETS_DEFAULT_ARGS})
   install(
     FILES
-    imgui_impl_sdl.h
+    imgui_impl_sdl2.h
     DESTINATION
-    include/ )    
+    include/ )
   add_library( imgui::platform-sdl2 ALIAS platform-sdl2 )
 endif()
 
@@ -62,7 +62,7 @@ if( IMGUI_BUILD_RENDERER_OPENGL2 )
     FILES
     imgui_impl_opengl2.h
     DESTINATION
-    include/ )    
+    include/ )
   add_library( imgui::renderer-opengl2 ALIAS renderer-opengl2 )
 endif()
 
@@ -90,7 +90,7 @@ if( IMGUI_BUILD_RENDERER_OPENGL3 )
     imgui_impl_opengl3.h
     imgui_impl_opengl3_loader.h
     DESTINATION
-    include/ )    
+    include/ )
   add_library( imgui::renderer-opengl3 ALIAS renderer-opengl3 )
 endif()
 
@@ -116,6 +116,6 @@ if( IMGUI_BUILD_RENDERER_VULKAN )
     FILES
     imgui_impl_vulkan.h
     DESTINATION
-    include/ )    
+    include/ )
   add_library( imgui::renderer-vulkan ALIAS renderer-vulkan )
 endif()
